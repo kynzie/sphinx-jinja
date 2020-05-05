@@ -38,7 +38,7 @@ class JinjaDirective(Directive):
                 print('')
                 print('********** Begin Jinja Debug Output: Template Before Processing **********')
                 print('********** From {} **********'.format(docname))
-                reference_uri = directives.uri(os.path.join('source', template_filename))
+                reference_uri = directives.uri(os.path.join(self.app.config.jinja_base, template_filename))
                 template_path = urllib.request.url2pathname(reference_uri)
                 encoded_path = template_path.encode(sys.getfilesystemencoding())
                 imagerealpath = os.path.abspath(encoded_path)
@@ -79,5 +79,5 @@ def setup(app):
     JinjaDirective.app = app
     app.add_directive('jinja', JinjaDirective)
     app.add_config_value('jinja_contexts', {}, 'env')
-    app.add_config_value('jinja_base', os.path.abspath('.'), 'env')
+    app.add_config_value('jinja_base', os.path.abspath(app.srcdir), 'env')
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
