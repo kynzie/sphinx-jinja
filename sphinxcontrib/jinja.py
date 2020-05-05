@@ -39,7 +39,7 @@ class JinjaDirective(Directive):
                 print('********** Begin Jinja Debug Output: Template Before Processing **********')
                 print('********** From {} **********'.format(docname))
                 reference_uri = directives.uri(os.path.join('source', template_filename))
-                template_path = urllib.url2pathname(reference_uri)
+                template_path = urllib.request.url2pathname(reference_uri)
                 encoded_path = template_path.encode(sys.getfilesystemencoding())
                 imagerealpath = os.path.abspath(encoded_path)
                 with codecs.open(imagerealpath, encoding='utf-8') as f:
